@@ -1,6 +1,6 @@
 import pygame
 from pygame.locals import *
-from src import Window
+import Window, Enemy, Player
 
 pygame.init()
 
@@ -13,6 +13,8 @@ class Game:
 
         self.wd.window.fill(self.wd.BLACK)
 
+        
+
     def game_loop(self):
         while True:
             for event in pygame.event.get():
@@ -20,6 +22,7 @@ class Game:
                     pygame.quit()
                     quit()
             self.wd.window.fill(self.wd.BLACK)
+
 
 
             pygame.display.update()
