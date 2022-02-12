@@ -1,10 +1,10 @@
 import pygame
 import Window
-from src import Game
+import Game
 
 
 class Character:
-    def __init__(self, game: Game.Game, img, x=0, y=0, height=10, width=10):
+    def __init__(self, game, img, x=0, y=0, height=10, width=10):
         self.game = game
         self.wd = game.wd
 

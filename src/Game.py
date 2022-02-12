@@ -1,9 +1,16 @@
+import math
+
 import pygame
 from pygame.locals import *
-import math
-import Window, Enemy, Player, Enemys, Lasesrs
+
+import Enemys
+import Lasesrs
+import Player
+import Window
+import Overlay
 
 pygame.init()
+pygame.mixer.init()
 
 
 class Game:
@@ -16,6 +23,8 @@ class Game:
         self.player = Player.Player(self, self.wd.width/2, self.wd.height-100)
 
         self.lasers = Lasesrs.Lasers(self)
+
+        self.overlay = Overlay.Overlay(self)
 
     def game_loop(self):
         while True:

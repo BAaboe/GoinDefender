@@ -1,10 +1,10 @@
 import pygame
 import Window
-from src import Game
+import Game
 
 
 class Laser:
-    def __init__(self, game: Game.Game, x, y):
+    def __init__(self, game, x, y):
         self.game = game
         self.wd = self.game.wd
 
@@ -13,9 +13,9 @@ class Laser:
         self.width = 9
         self.height = 12
 
-        self.ySpeed = 7
+        self.ySpeed = 12
 
-        self.img = pygame.image.load("../assets/RedLaser.png")
+        self.img = pygame.image.load("../assets/BlueLaser.png")
 
     def draw(self):
         self.wd.window.blit(self.img, (self.x, self.y))

@@ -5,7 +5,7 @@ import Game
 
 
 class Enemy(Character.Character):
-    def __init__(self, game: Game.Game, x, y, level=1):
+    def __init__(self, game, x, y, level=1):
 
         self.level = level
 

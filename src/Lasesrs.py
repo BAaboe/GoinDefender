@@ -1,11 +1,11 @@
 import pygame
 import Window
 import Laser
-from src import Game
+import Game
 
 
 class Lasers:
-    def __init__(self, game: Game.Game):
+    def __init__(self, game):
         self.game = game
         self.wd = game.wd
         self.lasers = []
@@ -18,7 +18,7 @@ class Lasers:
                 i.update()
 
     def addLaser(self, x, y):
-        self.lasers.append(Laser.Laser(self.wd, x, y))
+        self.lasers.append(Laser.Laser(self.game, x, y))
 
     def removeLaser(self, laser: Laser.Laser):
         self.lasers.remove(laser)

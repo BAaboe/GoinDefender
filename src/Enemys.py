@@ -1,11 +1,11 @@
 import pygame
 import Enemy
 import Window
-from src import Game
+import Game
 
 
 class Enemys:
-    def __init__(self, game: Game.Game):
+    def __init__(self, game):
         self.enemys = []
         self.game = game
 
