@@ -97,10 +97,6 @@ class Hearts:
         self.checkHP()
         self.draw()
 
-    def draw(self):
-        for heart in self.hearts:
-            heart.draw()
-
 
 class TextObjects:
     def __init__(self, game):

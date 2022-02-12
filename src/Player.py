@@ -2,7 +2,7 @@ import pygame
 from pygame.locals import *
 import Window
 import Character
-import Lasesrs
+import Lasers
 import Game
 
 
