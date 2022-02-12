@@ -26,29 +26,47 @@ class Game:
 
         self.overlay = Overlay.Overlay(self)
 
+        self.joystickConnected = False
+
+        try:
+            self.joystick = pygame.joystick.Joystick(0)
+            self.joystickConnected = True
+        except pygame.error as e:
+            self.joystickConnected = False
+
     def game_loop(self):
         while True:
+            self.wd.key_pressed = pygame.key.get_pressed()
+            print(self.joystick.get_axis(0))
             for event in pygame.event.get():
                 if event.type == QUIT:
                     pygame.quit()
                     quit()
-            self.wd.key_pressed = pygame.key.get_pressed()
             self.wd.window.fill(self.wd.BLACK)
 
             self.update()
             self.updateTime()
 
             pygame.display.update()
-            self.wd.FramesPerSecond.tick(self.wd.FPS)
+            self.wd.time.tick(self.wd.FPS)
 
     def update(self):
-        self.player.update()
-        self.enemys.update()
+        if not self.player.dead:
+            self.lasers.update()
+            self.player.update()
+            self.enemys.update()
+        else:
+            self.draw()
+        self.overlay.update()
+
+    def draw(self):
+        self.player.draw()
+        self.enemys.draw()
 
     def updateTime(self):
         self.wd.timeMs = pygame.time.get_ticks()
         self.wd.timeS = math.floor(self.wd.timeMs/100)
 
     def start(self):
-        # Do some shit idk
+        # TODO: Do some shit idk
         self.game_loop()

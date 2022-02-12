@@ -11,16 +11,17 @@ class Window:
 
         self.key_pressed = []
 
+
         self.window = pygame.display.set_mode((self.width, self.height))
         pygame.display.set_caption("Goin Invader")
 
         self.FPS = 30
-        self.FramesPerSecond = pygame.time.Clock()
+        self.time = pygame.time.Clock()
         self.timeMs = 0
         self.timeS = 0
 
     def display_text(self, size, text, color, x, y):
-        font = pygame.font.Font("./assets/flappy-bird.ttf", size)
+        font = pygame.font.Font("../assets/NotoSans-Regular.ttf", size)
         textObj = font.render(text, True, color)
         textRect = textObj.get_rect()
         textRect.center = (x, y)

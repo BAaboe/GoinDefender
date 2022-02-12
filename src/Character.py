@@ -4,9 +4,11 @@ import Game
 
 
 class Character:
-    def __init__(self, game, img, x=0, y=0, height=10, width=10):
+    def __init__(self, game, img, x=0, y=0, height=10, width=10, hp=5):
         self.game = game
         self.wd = game.wd
+
+        self.hp = hp
 
         self.x = x
         self.y = y
