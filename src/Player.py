@@ -13,7 +13,7 @@ class Player(Character.Character):
         self.movSpeed = 10
         self.direction = "right"
 
-        self.shootSpeed = 2
+        self.shootSpeed = 4
 
         self.lastShot = 0
 
@@ -87,7 +87,7 @@ class Player(Character.Character):
                 else:
                     self.ySpeed = self.movSpeed"""
 
-            if self.game.joystick.get_button(0):
+            if self.game.joystick.get_button(0) or self.game.joystick.get_button(7):
                 if self.wd.timeS - self.lastShot > self.shootSpeed:
                     self.shoot()
 

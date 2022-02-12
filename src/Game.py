@@ -19,7 +19,7 @@ class Game:
 
         self.wd.window.fill(self.wd.BLACK)
         self.enemies = Enemies.Enemies(self)
-        self.enemies.addEnemy(50, 50, 1)
+
         self.player = Player.Player(self, self.wd.width/2, self.wd.height-100)
 
         self.lasers = Lasesrs.Lasers(self)
@@ -39,6 +39,13 @@ class Game:
             self.wd.key_pressed = pygame.key.get_pressed()
             for event in pygame.event.get():
                 if event.type == QUIT:
+                    pygame.quit()
+                    quit()
+            if self.wd.key_pressed[K_ESCAPE]:
+                pygame.quit()
+                quit()
+            if self.joystickConnected:
+                if self.joystick.get_button(1):
                     pygame.quit()
                     quit()
             self.wd.window.fill(self.wd.BLACK)

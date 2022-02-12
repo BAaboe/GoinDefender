@@ -2,6 +2,7 @@ import pygame
 import Window
 import Game
 import Character
+import random
 
 
 class Enemies:
@@ -9,10 +10,16 @@ class Enemies:
         self.enemies = []
         self.game = game
         self.numOfEnemies = 0
+        self.maxEnemies = 5
 
     def update(self):
         for i in self.enemies:
             i.update()
+        if self.numOfEnemies < self.maxEnemies:
+            if self.enemies:
+                self.addEnemy(random.randint(0, self.game.wd.width/(self.enemies[-1].width+20))*(self.enemies[-1].width+20), 50., 1)
+            else:
+                self.addEnemy(20, 50, 1)
 
     def draw(self):
         for i in self.enemies:
@@ -42,9 +49,6 @@ class Enemy(Character.Character):
         super().__init__(game, pygame.image.load(f"../assets/goin{self.level}.png"), x, y, 30, 30, 5)
 
     def update(self):
-        if self.hp == 0:
-            self.game.enemys.removeEnemy(self)
-
         if self.wd.timeS-self.lastShot > self.shootSpeed:
             self.shoot()
 
@@ -64,12 +68,12 @@ class Enemy(Character.Character):
                 if laser.yDir == 1:
                     self.hp -= 1
                     self.game.lasers.removeLaser(laser)
-                    self.game.player.score += 1
                     if self.hp == 0:
                         self.die()
                     else:
                         pygame.mixer.Sound.play(self.hurtSound)
-                        self.game.joystick.rumble(0.5, 0.5, 100)
 
     def die(self):
+        self.game.enemies.removeEnemy(self)
         pygame.mixer.Sound.play(self.explosionSound)
+        self.game.player.score += self.level*5
