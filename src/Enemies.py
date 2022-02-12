@@ -4,24 +4,24 @@ import Game
 import Character
 
 
-class Enemys:
+class Enemies:
     def __init__(self, game):
-        self.enemys = []
+        self.enemies = []
         self.game = game
 
     def update(self):
-        for i in self.enemys:
+        for i in self.enemies:
             i.update()
 
     def draw(self):
-        for i in self.enemys:
+        for i in self.enemies:
             i.draw()
 
     def addEnemy(self, x, y, level):
-        self.enemys.append(Enemy(self.game, x, y, level))
+        self.enemies.append(Enemy(self.game, x, y, level))
 
     def removeEnemy(self, enemy):
-        self.enemys.remove(enemy)
+        self.enemies.remove(enemy)
 
 
 class Enemy(Character.Character):
@@ -36,7 +36,7 @@ class Enemy(Character.Character):
 
     def update(self):
         if self.hp == 0:
-            self.game.enemys.removeEnemy(self)
+            self.game.enemies.removeEnemy(self)
 
         if self.wd.timeS-self.lastShot > self.shootSpeed:
             self.shoot()
