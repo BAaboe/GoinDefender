@@ -3,8 +3,8 @@ The best Space Invaders ripoff you have ever seen
 
 ## Contributors
 
-###BAaboe
+### BAaboe
 Main Developer
 
-###loogabooga
+### loogabooga
 English
