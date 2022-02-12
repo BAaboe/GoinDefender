@@ -4,7 +4,7 @@ import pygame
 from pygame.locals import *
 
 import Enemys
-import Lasesrs
+import Lasers
 import Player
 import Window
 import Overlay
@@ -22,7 +22,7 @@ class Game:
         self.enemys.addEnemy(50, 50, 1)
         self.player = Player.Player(self, self.wd.width/2, self.wd.height-100)
 
-        self.lasers = Lasesrs.Lasers(self)
+        self.lasers = Lasers.Lasers(self)
 
         self.overlay = Overlay.Overlay(self)
 
