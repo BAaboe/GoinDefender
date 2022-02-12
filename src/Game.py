@@ -3,7 +3,7 @@ import math
 import pygame
 from pygame.locals import *
 
-import Enemys
+import Enemies
 import Lasers
 import Player
 import Window
@@ -18,7 +18,7 @@ class Game:
         self.wd = Window.Window()
 
         self.wd.window.fill(self.wd.BLACK)
-        self.enemys = Enemys.Enemys(self)
+        self.enemys = Enemies.Enemies(self)
         self.enemys.addEnemy(50, 50, 1)
         self.player = Player.Player(self, self.wd.width/2, self.wd.height-100)
 
