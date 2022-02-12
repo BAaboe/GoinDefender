@@ -3,7 +3,7 @@ import math
 import pygame
 from pygame.locals import *
 
-import Enemys
+import Enemies
 import Lasesrs
 import Player
 import Window
@@ -18,8 +18,8 @@ class Game:
         self.wd = Window.Window()
 
         self.wd.window.fill(self.wd.BLACK)
-        self.enemys = Enemys.Enemys(self)
-        self.enemys.addEnemy(50, 50, 1)
+        self.enemies = Enemies.Enemies(self)
+        self.enemies.addEnemy(50, 50, 1)
         self.player = Player.Player(self, self.wd.width/2, self.wd.height-100)
 
         self.lasers = Lasesrs.Lasers(self)
@@ -37,7 +37,6 @@ class Game:
     def game_loop(self):
         while True:
             self.wd.key_pressed = pygame.key.get_pressed()
-            print(self.joystick.get_axis(0))
             for event in pygame.event.get():
                 if event.type == QUIT:
                     pygame.quit()
@@ -54,14 +53,14 @@ class Game:
         if not self.player.dead:
             self.lasers.update()
             self.player.update()
-            self.enemys.update()
+            self.enemies.update()
         else:
             self.draw()
         self.overlay.update()
 
     def draw(self):
         self.player.draw()
-        self.enemys.draw()
+        self.enemies.draw()
 
     def updateTime(self):
         self.wd.timeMs = pygame.time.get_ticks()

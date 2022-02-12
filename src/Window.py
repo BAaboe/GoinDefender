@@ -11,7 +11,6 @@ class Window:
 
         self.key_pressed = []
 
-
         self.window = pygame.display.set_mode((self.width, self.height))
         pygame.display.set_caption("Goin Invader")
 

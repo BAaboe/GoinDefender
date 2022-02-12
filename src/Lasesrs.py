@@ -40,6 +40,8 @@ class Laser:
         self.ySpeed = 10
 
         self.img = pygame.image.load(f"../assets/{color}Laser.png")
+        if yDir == -1:
+            self.img = pygame.transform.flip(self.img, False, True)
 
     def draw(self):
         self.wd.window.blit(self.img, (self.x, self.y))
