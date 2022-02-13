@@ -108,11 +108,13 @@ class Player(Character.Character):
                     self.hp -= 1
                     self.game.lasers.removeLaser(laser)
                     if self.hp == 0:
-                        self.game.joystick.rumble(1, 1, 100)
+                        if self.game.joystickConnected:
+                            self.game.joystick.rumble(1, 1, 100)
                         self.die()
                     else:
                         pygame.mixer.Sound.play(self.hurtSound)
-                        self.game.joystick.rumble(0.5, 0.5, 100)
+                        if self.game.joystickConnected:
+                            self.game.joystick.rumble(0.5, 0.5, 100)
 
     def die(self):
         pygame.mixer.Sound.play(self.explosionSound)
