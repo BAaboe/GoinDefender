@@ -45,7 +45,7 @@ class Player(Character.Character):
         else:
             self.xSpeed = 0
 
-        """if self.wd.key_pressed[K_w]:
+        if self.wd.key_pressed[K_w]:
             if self.y <= 0:
                 self.ySpeed = 0
             else:
@@ -56,7 +56,7 @@ class Player(Character.Character):
             else:
                 self.ySpeed = -self.movSpeed
         else:
-            self.ySpeed = 0"""
+            self.ySpeed = 0
 
         if self.wd.key_pressed[K_SPACE]:
             if self.wd.timeS-self.lastShot > self.shootSpeed:
@@ -105,9 +105,9 @@ class Player(Character.Character):
             laserHitBox = pygame.Rect((laser.x, laser.y), (laser.width, laser.height))
             if playerHitBox.colliderect(laserHitBox):
                 if laser.yDir == -1:
-                    self.hp -= 1
+                    self.hp -= laser.damage
                     self.game.lasers.removeLaser(laser)
-                    if self.hp == 0:
+                    if self.hp <= 0:
                         if self.game.joystickConnected:
                             self.game.joystick.rumble(1, 1, 100)
                         self.die()

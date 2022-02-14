@@ -1,0 +1,24 @@
+{
+  "1": {"maxHP":  5,
+        "shootSpeed": 9,
+        "maxNum":  5,
+        "imgNum": 1,
+        "laserColor": "Blue",
+        "damage": 1,
+        "chanceOfPowerUp":  10},
+  "2": {"maxHP":  6,
+        "shootSpeed": 6,
+        "maxNum":  6,
+        "imgNum": 2,
+        "laserColor": "Blue",
+        "damage": 1,
+        "chanceOfPowerUp":  15},
+  "3": {"maxHP":  7,
+        "shootSpeed": 5,
+        "maxNum":  7,
+        "imgNum": 2,
+        "laserColor": "Green",
+        "damage": 2,
+        "chanceOfPowerUp":  20}
+
+}

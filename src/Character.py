@@ -8,7 +8,8 @@ class Character:
         self.game = game
         self.wd = game.wd
 
-        self.hp = hp
+        self.maxHP = hp
+        self.hp = self.maxHP
 
         self.x = x
         self.y = y

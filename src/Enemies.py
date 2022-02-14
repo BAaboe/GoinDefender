@@ -5,6 +5,7 @@ import Character
 import random
 
 
+
 class Enemies:
     def __init__(self, game):
         self.enemies = []
@@ -16,10 +17,17 @@ class Enemies:
         for i in self.enemies:
             i.update()
         if self.numOfEnemies < self.maxEnemies:
+            x = random.randint(0, self.game.wd.width/(30+20))*(30+20)
+            y = 50
+            level = random.randint(1, self.game.level)
             if self.enemies:
-                self.addEnemy(random.randint(0, self.game.wd.width/(self.enemies[-1].width+20))*(self.enemies[-1].width+20), 50., 1)
+                self.addEnemy(x, y, level)
+                for i in self.enemies:
+                    if i != self.enemies[-1]:
+                        if i.x == self.enemies[-1].x:
+                            self.removeEnemy(self.enemies[-1])
             else:
-                self.addEnemy(20, 50, 1)
+                self.addEnemy(x, y, level)
 
     def draw(self):
         for i in self.enemies:
@@ -36,17 +44,21 @@ class Enemies:
 
 class Enemy(Character.Character):
     def __init__(self, game, x, y, level=1):
-
         self.level = level
 
-        self.shootSpeed = 9
+        super().__init__(game, pygame.image.load(f'../assets/goin{game.levelData[str(level)]["imgNum"]}.png'), x, y, 30, 30)
+
+        self.maxHP = self.game.levelData[str(level)]["maxHP"]
+        self.hp = self.maxHP
+
+        self.shootSpeed = self.game.levelData[str(level)]["shootSpeed"]
         self.lastShot = 0
+
+        self.chanceOfDDrop = self.game.levelData[str(level)]["chanceOfPowerUp"]
 
         self.explosionSound = pygame.mixer.Sound("../assets/enemyExplosion.wav")
         self.hurtSound = pygame.mixer.Sound("../assets/hitHurt2.wav")
         self.shootSound = pygame.mixer.Sound("../assets/laserShoot2.wav")
-
-        super().__init__(game, pygame.image.load(f"../assets/goin{self.level}.png"), x, y, 30, 30, 5)
 
     def update(self):
         if self.wd.timeS-self.lastShot > self.shootSpeed:
@@ -56,7 +68,8 @@ class Enemy(Character.Character):
         self.check_if_hit()
 
     def shoot(self):
-        self.game.lasers.addLaser(self.x + self.width / 2, self.y, -1, "Blue")
+        self.game.lasers.addLaser(self.x + self.width / 2, self.y, -1, self.game.levelData[str(self.level)]["laserColor"],
+                                  self.game.levelData[str(self.level)]["damage"])
         pygame.mixer.Sound.play(self.shootSound)
         self.lastShot = self.wd.timeS
 
@@ -76,4 +89,20 @@ class Enemy(Character.Character):
     def die(self):
         self.game.enemies.removeEnemy(self)
         pygame.mixer.Sound.play(self.explosionSound)
-        self.game.player.score += self.level*5
+        self.game.player.score += self.maxHP
+        if random.randint(1, 100) <= self.chanceOfDDrop:
+            self.drop()
+
+    def drop(self):
+        # TODO: Complete this
+        pass
+
+    def draw(self):
+        super().draw()
+
+        if self.hp != self.maxHP:
+            height = self.height/self.maxHP*self.hp
+            s = pygame.Surface((self.width, height))
+            s.set_alpha(128)
+            s.fill((128, 128, 128))
+            self.game.wd.window.blit(s, (self.x, self.y+self.height-height))

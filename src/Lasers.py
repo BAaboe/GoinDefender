@@ -18,15 +18,15 @@ class Lasers:
             else:
                 i.update()
 
-    def addLaser(self, x, y, yDir=1, color="Red"):
-        self.lasers.append(Laser(self.game, x, y, yDir, color))
+    def addLaser(self, x, y, yDir=1, color="Red", damage=1):
+        self.lasers.append(Laser(self.game, x, y, yDir, color, damage))
 
     def removeLaser(self, laser):
         self.lasers.remove(laser)
 
 
 class Laser:
-    def __init__(self, game, x, y, yDir, color):
+    def __init__(self, game, x, y, yDir, color, damage):
         self.game = game
         self.wd = self.game.wd
 
@@ -38,6 +38,8 @@ class Laser:
         self.yDir = yDir
 
         self.ySpeed = 10
+
+        self.damage = damage
 
         self.img = pygame.image.load(f"../assets/{color}Laser.png")
         if yDir == -1:
